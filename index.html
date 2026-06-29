@@ -1,0 +1,2510 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Documental sobre muralismo urbano y street art.">
+    <meta name="keywords" content="muralismo, street art, graffiti, arte urbano, documental">
+    <meta name="author" content="Muralismo Urbano">
+    <title>MURALISMO URBANO - Documental</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+   <style>
+    /* ============================================ */
+    /* VARIABLES Y CONFIGURACIÓN BASE               */
+    /* ============================================ */
+    :root {
+        --color-bg: #0a0a0a;
+        --color-text: #ffffff;
+        --color-accent: #ff006e;
+        --color-accent-2: #00f5ff;
+        --color-accent-3: #0D9709;
+        --font-display: 'Permanent Marker', cursive;
+        --font-body: 'Inter', sans-serif;
+        --nav-height: 70px;
+        --transition-fast: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+        --transition-med: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Reset básico */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        font-family: var(--font-body);
+        background-color: var(--color-bg);
+        color: var(--color-text);
+        overflow: hidden;
+        height: 100vh;
+    }
+
+    /* ============================================ */
+    /* LAYOUT PRINCIPAL                             */
+    /* ============================================ */
+    .main-container {
+        position: fixed;
+        top: var(--nav-height);
+        left: 0;
+        width: 100%;
+        height: calc(100vh - var(--nav-height));
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+    }
+
+    .main-container::-webkit-scrollbar {
+        display: none;
+    }
+
+    .horizontal-strip {
+        display: flex;
+        flex-direction: row;
+        width: 900vw;
+        height: 100%;
+    }
+
+    section {
+        flex: 0 0 100vw;
+        height: 100%;
+        scroll-snap-align: start;
+        overflow-y: auto;
+        overflow-x: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: var(--color-accent) transparent;
+        content-visibility: auto;
+        contain-intrinsic-size: 100vw 800px;
+    }
+
+    section::-webkit-scrollbar {
+        width: 6px;
+    }
+
+    section::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    section::-webkit-scrollbar-thumb {
+        background: var(--color-accent);
+        border-radius: 3px;
+    }
+
+    .section-content {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 3rem 2rem 4rem;
+        background: rgba(0, 0, 0, 0.75);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .section-icon {
+        font-size: 2.5rem;
+        color: var(--color-accent);
+        margin-bottom: 1rem;
+    }
+
+    h2 {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        letter-spacing: 2px;
+        line-height: 1.1;
+    }
+
+    p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin-bottom: 1rem;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    /* ============================================ */
+    /* NAVBAR                                       */
+    /* ============================================ */
+    .navbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: var(--nav-height);
+        background: rgba(10, 10, 10, 0.97);
+        z-index: 1000;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 3%;
+        border-bottom: 2px solid var(--color-accent);
+    }
+
+    .logo {
+        font-family: var(--font-display);
+        font-size: 1.5rem;
+        color: var(--color-text);
+        text-decoration: none;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+    }
+
+    .nav-links {
+        display: flex;
+        gap: 1.5rem;
+        list-style: none;
+    }
+
+    .nav-links a {
+        color: var(--color-text);
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        transition: color var(--transition-fast);
+        padding: 0.5rem 0;
+    }
+
+    .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--color-accent-2);
+        transition: width var(--transition-fast);
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+        color: var(--color-accent-2);
+    }
+
+    .nav-links a:hover::after,
+    .nav-links a.active::after {
+        width: 100%;
+    }
+
+    /* Botón hamburguesa (oculto en desktop) */
+    .hamburger {
+        display: none;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+        z-index: 1001;
+    }
+
+    .hamburger span {
+        width: 28px;
+        height: 3px;
+        background: var(--color-text);
+        transition: transform var(--transition-fast), opacity var(--transition-fast);
+        border-radius: 2px;
+    }
+
+    .hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+
+    .hamburger.active span:nth-child(2) {
+        opacity: 0;
+    }
+
+    .hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(7px, -6px);
+    }
+
+    /* ============================================ */
+    /* MENÚ MÓVIL                                   */
+    /* ============================================ */
+    .mobile-menu {
+        position: fixed;
+        top: var(--nav-height);
+        left: -100%;
+        width: 280px;
+        height: calc(100vh - var(--nav-height));
+        background: rgba(10, 10, 10, 0.99);
+        z-index: 999;
+        transition: left var(--transition-med);
+        padding: 2rem;
+        border-right: 2px solid var(--color-accent);
+        overflow-y: auto;
+    }
+
+    .mobile-menu.active {
+        left: 0;
+    }
+
+    .mobile-menu ul {
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+
+    .mobile-menu a {
+        color: var(--color-text);
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-size: 1.2rem;
+        letter-spacing: 1px;
+        transition: color var(--transition-fast), transform var(--transition-fast);
+        display: block;
+        padding: 0.1rem 0 0.1rem 0.1rem;
+        border-left: 3px solid transparent;
+    }
+
+    .mobile-menu a:hover {
+        color: var(--color-accent-2);
+        border-left-color: var(--color-accent-2);
+        transform: translateX(10px);
+    }
+
+    /* ============================================ */
+    /* HOME SECTION                                 */
+    /* ============================================ */
+    #home .section-content {
+        background: linear-gradient(135deg, rgba(0, 0, 0, 0.85) 0%, rgba(255, 0, 110, 0.2) 100%);
+    }
+
+    #home h2 {
+        font-size: 3.5rem;
+        color: var(--color-accent-2);
+    }
+
+    .cta-button {
+        display: inline-block;
+        margin-top: 1.5rem;
+        padding: 0.8rem 2.5rem;
+        background: var(--color-accent);
+        color: white;
+        text-decoration: none;
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        border: 2px solid transparent;
+    }
+
+    .cta-button:hover {
+        background: transparent;
+        border-color: var(--color-accent);
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(255, 0, 110, 0.5);
+    }
+
+    /* ============================================ */
+    /* GALERÍA DE FOTOS                             */
+    /* ============================================ */
+    .photo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 0.8rem;
+        margin-top: 1.5rem;
+    }
+
+    .photo-item {
+        cursor: pointer;
+        overflow: hidden;
+        border: 2px solid var(--color-accent-2);
+        transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+        aspect-ratio: 1;
+    }
+
+    .photo-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform var(--transition-fast);
+    }
+
+    .photo-item:hover {
+        transform: scale(1.03);
+        z-index: 10;
+        box-shadow: 0 0 30px rgba(0, 245, 255, 0.5);
+    }
+
+    .photo-item:hover img {
+        transform: scale(1.1);
+    }
+
+    /* ============================================ */
+    /* ARTISTAS                                     */
+    /* ============================================ */
+    .artist-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+    }
+
+    .artist-card {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1rem 0.5rem;
+        border: 1px solid var(--color-accent-3);
+        text-align: center;
+        transition: transform var(--transition-fast), background var(--transition-fast);
+        cursor: pointer;
+    }
+
+    .artist-card:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-3px);
+    }
+
+    .artist-card img {
+        width: 100px;
+        height: 100px;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+        margin: 0 auto 0.8rem;
+        border: 2px solid var(--color-accent-3);
+        transition: transform var(--transition-fast);
+    }
+
+    .artist-card:hover img {
+        transform: scale(1.1);
+    }
+
+    .artist-card h3 {
+        font-family: var(--font-display);
+        color: var(--color-accent-3);
+        margin-bottom: 0;
+        font-size: 1rem;
+        line-height: 1.3;
+    }
+
+    /* ============================================ */
+    /* HISTORIA                                     */
+    /* ============================================ */
+    .history-gallery {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .history-item {
+        cursor: pointer;
+        overflow: hidden;
+        border: 2px solid var(--color-accent-3);
+        transition: transform var(--transition-fast);
+        aspect-ratio: 4/3;
+    }
+
+    .history-item img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+        transition: transform var(--transition-fast);
+    }
+
+    .history-item:hover {
+        transform: scale(1.05);
+        z-index: 10;
+    }
+
+    .history-item:hover img {
+        transform: scale(1.1);
+    }
+
+    /* ============================================ */
+    /* EQUIPO                                       */
+    /* ============================================ */
+    .team-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+    }
+
+    .team-member {
+        background: rgba(255, 255, 255, 0.05);
+        padding: 1.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        text-align: center;
+        transition: transform var(--transition-fast), border-color var(--transition-fast);
+        cursor: pointer;
+    }
+
+    .team-member:hover {
+        background: rgba(255, 255, 255, 0.1);
+        transform: translateY(-5px);
+        border-color: var(--color-accent-2);
+    }
+
+    .team-member img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        object-fit: cover;
+        border: 3px solid var(--color-accent-2);
+        margin-bottom: 1rem;
+        transition: transform var(--transition-fast);
+    }
+
+    .team-member:hover img {
+        transform: scale(1.05);
+    }
+
+    .team-member h3 {
+        font-family: var(--font-display);
+        color: var(--color-accent-2);
+        font-size: 1.2rem;
+        margin-bottom: 0.3rem;
+    }
+
+    .team-member .role {
+        color: var(--color-accent-3);
+        font-size: 0.85rem;
+        font-weight: 600;
+        margin-bottom: 0.8rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .team-member p {
+        font-size: 0.85rem;
+        line-height: 1.5;
+    }
+
+    /* ============================================ */
+    /* VIDEOS                                       */
+    /* ============================================ */
+    .video-container {
+        width: 100%;
+        max-width: 700px;
+        aspect-ratio: 16/9;
+        background: #000;
+        border: 3px solid var(--color-accent-3);
+        margin: 1.5rem auto;
+    }
+
+    .video-placeholder {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: linear-gradient(45deg, #1a1a1a, #2a2a2a);
+    }
+
+    .play-button {
+        font-size: 3.5rem;
+        color: var(--color-accent);
+        cursor: pointer;
+        transition: transform var(--transition-fast), color var(--transition-fast);
+    }
+
+    .play-button:hover {
+        transform: scale(1.2);
+        color: var(--color-accent-2);
+    }
+
+    /* ============================================ */
+    /* PAGINACIÓN                                   */
+    /* ============================================ */
+    .pagination {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+        margin-top: 2rem;
+        flex-wrap: wrap;
+    }
+
+    .pagination-btn {
+        padding: 0.6rem 1.2rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 2px solid var(--color-accent-3);
+        color: var(--color-text);
+        font-family: var(--font-display);
+        font-size: 0.9rem;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+
+    .pagination-btn:hover {
+        background: var(--color-accent-3);
+        color: var(--color-bg);
+        transform: translateY(-2px);
+    }
+
+    .pagination-btn.active {
+        background: var(--color-accent-2);
+        border-color: var(--color-accent-2);
+        color: var(--color-bg);
+    }
+
+    .pagination-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+
+    .pagination-btn:disabled:hover {
+        background: rgba(255, 255, 255, 0.05);
+        color: var(--color-text);
+        transform: none;
+    }
+
+    /* ============================================ */
+    /* FORMULARIO DE CONTACTO                       */
+    /* ============================================ */
+    .contact-form {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        max-width: 600px;
+        width: 100%;
+        margin: 1.5rem auto;
+    }
+
+    .form-group input,
+    .form-group textarea {
+        width: 100%;
+        padding: 0.8rem;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        color: white;
+        font-family: var(--font-body);
+        font-size: 0.9rem;
+        transition: border-color var(--transition-fast);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+        outline: none;
+        border-color: var(--color-accent-2);
+    }
+
+    .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+    }
+
+    .submit-btn {
+        padding: 0.8rem 2.5rem;
+        background: var(--color-accent-2);
+        color: var(--color-bg);
+        border: none;
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        cursor: pointer;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        transition: transform var(--transition-fast);
+    }
+
+    .submit-btn:hover {
+        transform: translateY(-2px);
+    }
+
+    /* ============================================ */
+    /* FOOTER                                       */
+    /* ============================================ */
+    .site-footer {
+        flex: 0 0 100vw;
+        height: 100%;
+        scroll-snap-align: start;
+        overflow-y: auto;
+        overflow-x: hidden;
+        background: var(--color-bg);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-top: 2px solid var(--color-accent);
+    }
+
+    .footer-content {
+        text-align: center;
+        padding: 3rem 2rem;
+        max-width: 800px;
+        width: 100%;
+    }
+
+    .footer-logo {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        color: var(--color-text);
+        text-decoration: none;
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        display: inline-block;
+        margin-bottom: 2rem;
+    }
+
+    .footer-social {
+        display: flex;
+        justify-content: center;
+        gap: 1.5rem;
+        margin-bottom: 2rem;
+    }
+
+    .footer-social a {
+        color: var(--color-text);
+        font-size: 1.8rem;
+        transition: color var(--transition-fast), transform var(--transition-fast);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        border: 2px solid rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
+    }
+
+    .footer-social a:hover {
+        color: var(--color-accent-2);
+        border-color: var(--color-accent-2);
+        transform: translateY(-3px);
+    }
+
+    .footer-divider {
+        width: 60px;
+        height: 2px;
+        background: var(--color-accent);
+        margin: 0 auto 1.5rem;
+    }
+
+    .footer-copy {
+        font-size: 0.85rem;
+        color: rgba(255, 255, 255, 0.6);
+        line-height: 1.6;
+    }
+
+    .footer-copy strong {
+        color: var(--color-accent-2);
+        font-weight: 600;
+    }
+
+    /* ============================================ */
+    /* PRELOADER                                    */
+    /* ============================================ */
+    .preloader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(10, 10, 10, 0.98);
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 200ms ease, visibility 200ms ease;
+        padding: 2rem;
+    }
+
+    .preloader.hidden {
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+    }
+
+    .preloader-logo {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        color: var(--color-text);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+        transform: rotate(-2deg);
+        text-shadow: 3px 3px 0px var(--color-accent);
+        margin-bottom: 2rem;
+        animation: pulseLogo 1.5s ease-in-out infinite;
+    }
+
+    .preloader-logo span {
+        color: var(--color-accent);
+    }
+
+    @keyframes pulseLogo {
+        0%, 100% {
+            transform: rotate(-2deg) scale(1);
+            text-shadow: 3px 3px 0px var(--color-accent);
+        }
+        50% {
+            transform: rotate(-2deg) scale(1.05);
+            text-shadow: 3px 3px 15px var(--color-accent);
+        }
+    }
+
+    .preloader-text {
+        font-family: var(--font-display);
+        font-size: 1rem;
+        color: var(--color-accent-2);
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        margin-bottom: 1.5rem;
+    }
+
+    .preloader-bar-container {
+        width: 100%;
+        max-width: 400px;
+        margin-bottom: 1rem;
+    }
+
+    .preloader-bar {
+        width: 100%;
+        height: 8px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 2px solid var(--color-accent-2);
+        border-radius: 4px;
+        overflow: hidden;
+        position: relative;
+        box-shadow: 0 0 15px rgba(0, 245, 255, 0.3);
+    }
+
+    .preloader-bar-fill {
+        height: 100%;
+        width: 0%;
+        background: linear-gradient(90deg, var(--color-accent) 0%, var(--color-accent-3) 50%, var(--color-accent-2) 100%);
+        border-radius: 2px;
+        transition: width 150ms ease-out;
+        position: relative;
+        box-shadow: 0 0 10px rgba(255, 0, 110, 0.6);
+    }
+
+    .preloader-bar-fill::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 20px;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.6));
+        animation: shimmer 1s ease-in-out infinite;
+    }
+
+    @keyframes shimmer {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
+    .preloader-percent {
+        font-family: var(--font-display);
+        font-size: 2.5rem;
+        color: var(--color-text);
+        text-shadow: 2px 2px 0px var(--color-accent-3);
+        letter-spacing: 2px;
+        margin-top: 0.5rem;
+    }
+
+    .preloader-percent span {
+        color: var(--color-accent-2);
+        font-size: 1.5rem;
+    }
+
+    /* ============================================ */
+    /* MODAL CON NAVEGACIÓN                         */
+    /* ============================================ */
+    .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.95);
+        z-index: 2000;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        overflow-y: auto;
+    }
+
+    .modal.active {
+        display: flex;
+    }
+
+    .modal-content {
+        max-width: 90%;
+        max-height: 90vh;
+        background: rgba(20, 20, 20, 0.95);
+        border: 2px solid var(--color-accent);
+        padding: 2rem;
+        overflow-y: auto;
+        position: relative;
+    }
+
+    .modal-close {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        font-size: 2rem;
+        color: var(--color-accent);
+        cursor: pointer;
+        z-index: 2001;
+        transition: transform var(--transition-fast);
+    }
+
+    .modal-close:hover {
+        transform: rotate(90deg);
+    }
+
+    .modal-image-wrapper {
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+    }
+
+    .modal-image {
+        max-width: 100%;
+        max-height: 60vh;
+        width: auto;
+        height: auto;
+        display: block;
+    }
+
+    .modal-nav-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background: rgba(0, 0, 0, 0.7);
+        border: 2px solid var(--color-accent-2);
+        color: var(--color-accent-2);
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: all var(--transition-fast);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 10;
+    }
+
+    .modal-nav-btn:hover:not(:disabled) {
+        background: var(--color-accent-2);
+        color: var(--color-bg);
+        transform: translateY(-50%) scale(1.1);
+    }
+
+    .modal-nav-btn:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+    }
+
+    .modal-nav-btn.prev {
+        left: -25px;
+    }
+
+    .modal-nav-btn.next {
+        right: -25px;
+    }
+
+    .modal-counter {
+        font-family: var(--font-display);
+        font-size: 1.1rem;
+        color: var(--color-accent-2);
+        text-align: center;
+        margin-bottom: 1rem;
+        letter-spacing: 2px;
+    }
+
+    .modal-counter span {
+        color: var(--color-text);
+    }
+
+    .modal-title {
+        font-family: var(--font-display);
+        font-size: 2rem;
+        color: var(--color-accent-2);
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    .modal-description {
+        font-size: 1rem;
+        line-height: 1.6;
+        color: rgba(255, 255, 255, 0.9);
+        text-align: center;
+    }
+
+    /* ============================================ */
+    /* RESPONSIVE - TABLET (max-width: 1200px)      */
+    /* ============================================ */
+    @media (max-width: 1200px) {
+        .photo-grid {
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+        }
+
+        .artist-grid {
+            grid-template-columns: repeat(4, 1fr);
+        }
+    }
+
+    /* ============================================ */
+    /* RESPONSIVE - TABLET PEQUEÑA (max-width: 968px) */
+    /* ============================================ */
+    @media (max-width: 968px) {
+        .nav-links {
+            display: none;
+        }
+
+        .hamburger {
+            display: flex;
+        }
+
+        .mobile-menu {
+            display: block;
+        }
+
+        .photo-grid {
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        }
+
+        .artist-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .history-gallery {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .team-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        h2 {
+            font-size: 2rem;
+        }
+
+        #home h2 {
+            font-size: 2.5rem;
+        }
+
+        .section-content {
+            padding: 2rem 1.5rem 3rem;
+        }
+    }
+
+    /* ============================================ */
+    /* RESPONSIVE - MÓVIL (max-width: 600px)        */
+    /* ============================================ */
+    @media (max-width: 600px) {
+        body {
+            overflow: visible;
+            overflow-x: hidden;
+            height: auto;
+            min-height: 100vh;
+        }
+
+        html {
+            overflow-x: hidden;
+        }
+
+        .main-container {
+            position: relative;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            overflow-x: hidden;
+            overflow-y: visible;
+            scroll-snap-type: none;
+            margin-top: var(--nav-height);
+        }
+
+        .horizontal-strip {
+            flex-direction: column;
+            width: 100%;
+            height: auto;
+        }
+
+        section {
+            flex: 0 0 auto;
+            width: 100%;
+            height: auto;
+            min-height: auto;
+            overflow-y: visible;
+            overflow-x: hidden;
+            scroll-snap-align: none;
+            content-visibility: visible;
+            contain-intrinsic-size: 100vw 900px;
+            scroll-margin-top: 75px;
+            padding-top: 0;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+        }
+
+        #home h2 {
+            font-size: 2rem;
+        }
+
+        .section-icon {
+            font-size: 2rem;
+        }
+
+        p {
+            font-size: 0.85rem;
+        }
+
+        .section-content {
+            padding: 1.5rem 1rem 2.5rem;
+        }
+
+        .photo-grid {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        .artist-grid {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.8rem;
+        }
+
+        .history-gallery {
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.6rem;
+        }
+
+        .team-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .artist-card {
+            padding: 0.8rem 0.5rem;
+        }
+
+        .artist-card img {
+            width: 90px;
+            height: 90px;
+            margin-bottom: 0.6rem;
+        }
+
+        .artist-card h3 {
+            font-size: 0.85rem;
+        }
+
+        .pagination {
+            gap: 0.5rem;
+        }
+
+        .pagination-btn {
+            padding: 0.5rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        .site-footer {
+            flex: 0 0 auto;
+            width: 100%;
+            height: auto;
+            scroll-snap-align: none;
+            border-top: 2px solid var(--color-accent);
+            padding-top: 2rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social {
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-social a {
+            font-size: 1.5rem;
+            width: 45px;
+            height: 45px;
+        }
+
+        .footer-copy {
+            font-size: 0.8rem;
+        }
+
+        #videos .section-content > div[style] {
+            grid-template-columns: 1fr !important;
+        }
+
+        .preloader-logo {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .preloader-text {
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+        }
+
+        .preloader-bar-container {
+            max-width: 280px;
+        }
+
+        .preloader-bar {
+            height: 6px;
+        }
+
+        .preloader-percent {
+            font-size: 2rem;
+        }
+
+        .modal {
+            padding: 0.75rem;
+            align-items: flex-start;
+            padding-top: calc(var(--nav-height) + 0.5rem);
+        }
+
+        .modal-content {
+            width: 100%;
+            max-width: 100%;
+            max-height: none;
+            height: auto;
+            padding: 2.5rem 0.5rem 1rem;
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            overflow: visible;
+        }
+
+        .modal-close {
+            top: 0.5rem;
+            right: 0.5rem;
+            font-size: 2.2rem;
+            line-height: 1;
+            padding: 0.25rem;
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal-image-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .modal-image {
+            width: 100%;
+            max-width: 100%;
+            height: auto;
+            max-height: calc(100vh - var(--nav-height) - 200px);
+            object-fit: contain;
+            margin: 0;
+        }
+
+        .modal-nav-btn {
+            width: 40px;
+            height: 40px;
+            font-size: 1.2rem;
+        }
+
+        .modal-nav-btn.prev {
+            left: 5px;
+        }
+
+        .modal-nav-btn.next {
+            right: 5px;
+        }
+
+        .modal-counter {
+            font-size: 0.95rem;
+        }
+
+        .modal-title {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+            padding-right: 2.5rem;
+        }
+
+        .modal-description {
+            font-size: 0.9rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+    }
+
+    /* ============================================ */
+    /* RESPONSIVE - MÓVIL PEQUEÑO (max-width: 380px) */
+    /* ============================================ */
+    @media (max-width: 380px) {
+        .photo-grid,
+        .artist-grid,
+        .history-gallery {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .modal-image {
+            max-height: calc(100vh - var(--nav-height) - 180px);
+        }
+
+        .modal-title {
+            font-size: 1.15rem;
+        }
+
+        .modal-description {
+            font-size: 0.85rem;
+        }
+    }
+
+    /* ============================================ */
+    /* RESPONSIVE - MÓVIL ALTO (max-width: 600px, min-height: 800px) */
+    /* ============================================ */
+    @media (max-width: 600px) and (min-height: 800px) {
+        .modal-image {
+            max-height: calc(100vh - var(--nav-height) - 220px);
+        }
+    }
+</style>
+</head>
+<body>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!--  ★  NAVBAR PRINCIPAL                                              -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <nav class="navbar" role="navigation" aria-label="Navegación principal">
+        <a href="#home" class="logo" title="Inicio">Alta Gracia<span style="color: var(--color-accent);"> Se Pinta</span></a>
+        <ul class="nav-links">
+            <li><a href="#home" data-section="0">Inicio</a></li>
+            <li><a href="#historia" data-section="1">Historia</a></li>
+            <li><a href="#documental" data-section="2">Documental</a></li>
+            <li><a href="#artistas" data-section="3">Artistas</a></li>
+            <li><a href="#fotos" data-section="4">Fotos</a></li>
+            <li><a href="#videos" data-section="5">Videos</a></li>
+            <li><a href="#quienes-somos" data-section="6">Equipo</a></li>
+            <li><a href="#contacto" data-section="7">Contacto</a></li>
+        </ul>
+        <div class="hamburger" id="hamburger" aria-label="Abrir menú" role="button" tabindex="0">
+            <span></span><span></span><span></span>
+        </div>
+    </nav>
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!--  ★  FIN NAVBAR                                                     -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!--  ★  MENÚ MÓVIL (hamburguesa)                                       -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+  
+    <div class="mobile-menu" id="mobileMenu" role="navigation" aria-label="Menú móvil">
+    <ul>
+        <li><a href="#home" class="mobile-link"><i class="fas fa-home" style="margin-right: 3px; color: #00f5ff;"></i> Inicio</a></li>
+        <li><a href="#historia" class="mobile-link"><i class="fas fa-book-open" style="margin-right: 3px; color: #00f5ff;"></i> Historia</a></li>
+        <li><a href="#documental" class="mobile-link"><i class="fas fa-film" style="margin-right: 3px; color: #00f5ff;"></i> Documental</a></li>
+        <li><a href="#artistas" class="mobile-link"><i class="fas fa-paint-brush" style="margin-right: 3px; color: #00f5ff;"></i> Artistas</a></li>
+        <li><a href="#fotos" class="mobile-link"><i class="fas fa-camera" style="margin-right: 3px; color: #00f5ff;"></i> Fotos</a></li>
+        <li><a href="#videos" class="mobile-link"><i class="fas fa-video" style="margin-right: 3px; color: #00f5ff;"></i> Videos</a></li>
+        <li><a href="#quienes-somos" class="mobile-link"><i class="fas fa-users" style="margin-right: 3px; color: #00f5ff;"></i> Equipo</a></li>
+        <li><a href="#contacto" class="mobile-link"><i class="fas fa-envelope" style="margin-right: 3px; color: #00f5ff;"></i> Contacto</a></li>
+    </ul>
+</div>
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!--  ★  FIN MENÚ MÓVIL                                                 -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!--  ★  CONTENEDOR PRINCIPAL DE SECCIONES                              -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <main class="main-container" id="mainContainer" role="main">
+        <div class="horizontal-strip">
+
+
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <!--  ▶  SECCIÓN: HOME (Inicio)                                  -->
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <section id="home" aria-label="Inicio">
+                <div class="section-content">
+                    <i class="fas fa-spray-can section-icon" aria-hidden="true"></i>
+                    <h2>Arte en las Calles</h2>
+                    <p>Un viaje visual por el movimiento muralista contemporáneo. Descubre cómo el graffiti y el street art están redefiniendo el paisaje urbano y la cultura visual de nuestras ciudades.</p>
+                    
+                    <div class="photo-grid">
+                        <div class="photo-item" data-title="Mural en Berlín" data-description="Intervención urbana en el muro de East Side Gallery." data-img="img/texturas/01.jpg">
+                            <img data-src="img/texturas/01.jpg" alt="Mural en Berlín" title="Mural en Berlín">
+                        </div>
+                        <div class="photo-item" data-title="Mural en Berlín" data-description="Intervención urbana en el muro de East Side Gallery." data-img="img/texturas/05.jpg">
+                            <img data-src="img/texturas/05.jpg" alt="Mural en Berlín" title="Mural en Berlín">
+                        </div>
+                    </div>
+                    <a href="#documental" class="cta-button" title="Ver el documental completo">Ver Documental</a>
+                </div>
+            </section>
+           
+
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <!--  ▶  SECCIÓN: HISTORIA DEL MOVIMIENTO                       -->
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <section id="historia" aria-label="Historia del movimiento">
+                <div class="section-content">
+                    <i class="fas fa-history section-icon" style="color: var(--color-accent-3);" aria-hidden="true"></i>
+                    <h2>Historia del Movimiento</h2>
+                    <p>Desde los orígenes del graffiti en Nueva York en los años 70 hasta el street art globalizado de hoy.</p>
+                    <p>El muralismo contemporáneo hereda la tradición de Diego Rivera y los muralistas mexicanos, pero con nuevas técnicas, mensajes y alcance global.</p>
+                    <div class="history-gallery">
+                        <div class="history-item" data-title="Orígenes en NYC" data-description="Nueva York, años 70." data-img="img/historia/IMG_6820.JPG"><img data-src="img/historia/IMG_6820.JPG" loading="lazy" alt="Orígenes" title="Orígenes en NYC"></div>
+                        <div class="history-item" data-title="Muralismo Mexicano" data-description="La influencia de Rivera, Orozco y Siqueiros." data-img="img/historia/IMG_7199.JPG"><img data-src="img/historia/IMG_7199.JPG" loading="lazy" alt="Muralismo" title="Muralismo Mexicano"></div>
+                        <div class="history-item" data-title="Cultura Hip Hop" data-description="Los cuatro elementos del hip hop." data-img="img/historia/IMG_7288.JPG"><img data-src="img/historia/IMG_7288.JPG" loading="lazy" alt="Hip Hop" title="Cultura Hip Hop"></div>
+                        <div class="history-item" data-title="Evolución Global" data-description="De las calles de NYC a todo el mundo." data-img="img/historia/IMG_7554.JPG"><img data-src="img/historia/IMG_7554.JPG" loading="lazy" alt="Evolución" title="Evolución Global"></div>
+                        <div class="history-item" data-title="Técnicas Tradicionales" data-description="Del aerosol al pincel." data-img="img/historia/IMG_7709.JPG"><img data-src="img/historia/IMG_7709.JPG" loading="lazy" alt="Técnicas" title="Técnicas Tradicionales"></div>
+                        <div class="history-item" data-title="Arte y Protesta" data-description="El street art como herramienta de expresión." data-img="img/historia/IMG_7771.JPG"><img data-src="img/historia/IMG_7771.JPG" loading="lazy" alt="Protesta" title="Arte y Protesta"></div>
+                    </div>
+                </div>
+            </section>
+           
+
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <!--  ▶  SECCIÓN: DOCUMENTAL                                    -->
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <section id="documental" aria-label="El documental">
+                <div class="section-content">
+                    <i class="fas fa-film section-icon" style="color: var(--color-accent-2);" aria-hidden="true"></i>
+                    <h2>El Documental</h2>
+                    <p>Una inmersión profunda en el proceso creativo de los muralistas más influyentes de la última década.</p>
+                    <div class="video-container">
+                        <div class="video-placeholder"><i class="fas fa-play-circle play-button" title="Reproducir documental"></i></div>
+                    </div>
+                </div>
+            </section>
+           
+
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <!--  ▶  SECCIÓN: ARTISTAS RELACIONADOS                         -->
+            <!-- ─────────────────────────────────────────────────────────── -->
+           <section id="artistas" aria-label="Artistas relacionados">
+                <div class="section-content">
+                    <i class="fas fa-palette section-icon" style="color: var(--color-accent-2);" aria-hidden="true"></i>
+                    <h2>Artistas Relacionados</h2>
+                    <p>Conoce a los creadores detrás de las obras que están transformando nuestras ciudades.</p>
+                    <div class="artist-grid" id="artistGrid">
+
+                        <!-- ══════════════════════════════════════════════ -->
+                        <!--  PÁGINA 1 DE ARTISTAS (1-15)                  -->
+                        <!-- ══════════════════════════════════════════════ -->
+                        <article class="artist-card" data-page="1" data-title="Alex 'Scribe' Martínez" data-description="Especialista en tipografía y lettering." data-img="img/caras/01.jpg">
+                            <img data-src="img/caras/01.jpg" alt="Alex Scribe Martínez" title="Alex Scribe Martínez">
+                            <h3>Alex "Scribe"</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="1" data-title="Luna 'Graffiti Queen'" data-description="Pionera del arte urbano femenino." data-img="img/caras/02.jpg">
+                            <img data-src="img/caras/02.jpg" alt="Luna Graffiti Queen" title="Luna Graffiti Queen">
+                            <h3>Luna "Queen"</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="1" data-title="Diego 'Muralista'" data-description="Maestro del realismo social." data-img="img/caras/03.jpg">
+                            <img data-src="img/caras/03.jpg" alt="Diego Muralista" title="Diego Muralista">
+                            <h3>Diego "Muralista"</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="1" data-title="Kai 'Neon'" data-description="Experto en técnicas 3D." data-img="img/caras/04.jpg">
+                            <img data-src="img/caras/04.jpg" alt="Kai Neon" title="Kai Neon">
+                            <h3>Kai "Neon"</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="1" data-title="Sofía 'Color'" data-description="Artista colombiana especializada en paletas vibrantes." data-img="img/caras/05.jpg">
+                            <img data-src="img/caras/05.jpg" alt="Sofía Color" title="Sofía Color">
+                            <h3>Sofía "Color"</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="1" data-title="Marcus 'Shadow'" data-description="Artista alemán en blanco y negro." data-img="img/caras/06.jpg">
+                            <img data-src="img/caras/06.jpg" alt="Marcus Shadow" title="Marcus Shadow">
+                            <h3>Marcus "Shadow"</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="1" data-title="Yuki 'Sakura'" data-description="Fusiona arte urbano con arte japonés tradicional." data-img="img/caras/07.jpg">
+                            <img data-src="img/caras/07.jpg" alt="Yuki Sakura" title="Yuki Sakura">
+                            <h3>Yuki "Sakura"</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="1" data-title="Carlos 'Revolution'" data-description="Muralista mexicano heredero de Rivera." data-img="img/caras/08.jpg">
+                            <img data-src="img/caras/08.jpg" alt="Carlos Revolution" title="Carlos Revolution">
+                            <h3>Carlos "Revolution"</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="1" data-title="Emma 'Wild'" data-description="Especializada en fauna urbana." data-img="img/caras/09.jpg">
+                            <img data-src="img/caras/09.jpg" alt="Emma Wild" title="Emma Wild">
+                            <h3>Emma "Wild"</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="1" data-title="Raj 'Mystic'" data-description="Incorpora simbolismo espiritual." data-img="img/caras/10.jpg">
+                            <img data-src="img/caras/10.jpg" alt="Raj Mystic" title="Raj Mystic">
+                            <h3>Raj "Mystic"</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="1" data-title="Artista 11" data-description="" data-img="img/caras/11.jpg">
+                            <img data-src="img/caras/11.jpg" alt="Artista 11" title="Artista 11">
+                            <h3>Artista 11</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="1" data-title="Artista 12" data-description="" data-img="img/caras/12.jpg">
+                            <img data-src="img/caras/12.jpg" alt="Artista 12" title="Artista 12">
+                            <h3>Artista 12</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="1" data-title="Artista 13" data-description="" data-img="img/caras/13.jpg">
+                            <img data-src="img/caras/13.jpg" alt="Artista 13" title="Artista 13">
+                            <h3>Artista 13</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="1" data-title="Artista 14" data-description="" data-img="img/caras/14.jpg">
+                            <img data-src="img/caras/14.jpg" alt="Artista 14" title="Artista 14">
+                            <h3>Artista 14</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="1" data-title="Artista 15" data-description="" data-img="img/caras/15.jpg">
+                            <img data-src="img/caras/15.jpg" alt="Artista 15" title="Artista 15">
+                            <h3>Artista 15</h3>
+                        </article>
+
+                        <!-- ══════════════════════════════════════════════ -->
+                        <!--  PÁGINA 2 DE ARTISTAS (16-30)                 -->
+                        <!-- ══════════════════════════════════════════════ -->
+                        
+                        <article class="artist-card" data-page="2" data-title="Artista 16" data-description="" data-img="img/caras/16.jpg">
+                            <img data-src="img/caras/16.jpg" alt="Artista 16" title="Artista 16">
+                            <h3>Artista 16</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="2" data-title="Artista 17" data-description="" data-img="img/caras/17.jpg">
+                            <img data-src="img/caras/17.jpg" alt="Artista 17" title="Artista 17">
+                            <h3>Artista 17</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="2" data-title="Artista 18" data-description="" data-img="img/caras/18.jpg">
+                            <img data-src="img/caras/18.jpg" alt="Artista 18" title="Artista 18">
+                            <h3>Artista 18</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="2" data-title="Artista 19" data-description="" data-img="img/caras/19.jpg">
+                            <img data-src="img/caras/19.jpg" alt="Artista 19" title="Artista 19">
+                            <h3>Artista 19</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="2" data-title="Artista 20" data-description="" data-img="img/caras/20.jpg">
+                            <img data-src="img/caras/20.jpg" alt="Artista 20" title="Artista 20">
+                            <h3>Artista 20</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="2" data-title="Artista 21" data-description="" data-img="img/caras/21.jpg">
+                            <img data-src="img/caras/21.jpg" alt="Artista 21" title="Artista 21">
+                            <h3>Artista 21</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="2" data-title="Artista 22" data-description="" data-img="img/caras/22.jpg">
+                            <img data-src="img/caras/22.jpg" alt="Artista 22" title="Artista 22">
+                            <h3>Artista 22</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="2" data-title="Artista 23" data-description="" data-img="img/caras/23.jpg">
+                            <img data-src="img/caras/23.jpg" alt="Artista 23" title="Artista 23">
+                            <h3>Artista 23</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="2" data-title="Artista 24" data-description="" data-img="img/caras/24.jpg">
+                            <img data-src="img/caras/24.jpg" alt="Artista 24" title="Artista 24">
+                            <h3>Artista 24</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="2" data-title="Artista 25" data-description="" data-img="img/caras/25.jpg">
+                            <img data-src="img/caras/25.jpg" alt="Artista 25" title="Artista 25">
+                            <h3>Artista 25</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="2" data-title="Artista 26" data-description="" data-img="img/caras/26.jpg">
+                            <img data-src="img/caras/26.jpg" alt="Artista 26" title="Artista 26">
+                            <h3>Artista 26</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="2" data-title="Artista 27" data-description="" data-img="img/caras/27.jpg">
+                            <img data-src="img/caras/27.jpg" alt="Artista 27" title="Artista 27">
+                            <h3>Artista 27</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="2" data-title="Artista 28" data-description="" data-img="img/caras/28.jpg">
+                            <img data-src="img/caras/28.jpg" alt="Artista 28" title="Artista 28">
+                            <h3>Artista 28</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="2" data-title="Artista 29" data-description="" data-img="img/caras/29.jpg">
+                            <img data-src="img/caras/29.jpg" alt="Artista 29" title="Artista 29">
+                            <h3>Artista 29</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="2" data-title="Artista 30" data-description="" data-img="img/caras/30.jpg">
+                            <img data-src="img/caras/30.jpg" alt="Artista 30" title="Artista 30">
+                            <h3>Artista 30</h3>
+                        </article>
+
+                        <!-- ══════════════════════════════════════════════ -->
+                        <!--  PÁGINA 3 DE ARTISTAS (31-45)                 -->
+                        <!-- ══════════════════════════════════════════════ -->
+                        
+                        <article class="artist-card" data-page="3" data-title="Artista 31" data-description="" data-img="img/caras/31.jpg">
+                            <img data-src="img/caras/31.jpg" alt="Artista 31" title="Artista 31">
+                            <h3>Artista 31</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="3" data-title="Artista 32" data-description="" data-img="img/caras/32.jpg">
+                            <img data-src="img/caras/32.jpg" alt="Artista 32" title="Artista 32">
+                            <h3>Artista 32</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="3" data-title="Artista 33" data-description="" data-img="img/caras/33.jpg">
+                            <img data-src="img/caras/33.jpg" alt="Artista 33" title="Artista 33">
+                            <h3>Artista 33</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="3" data-title="Artista 34" data-description="" data-img="img/caras/34.jpg">
+                            <img data-src="img/caras/34.jpg" alt="Artista 34" title="Artista 34">
+                            <h3>Artista 34</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="3" data-title="Artista 35" data-description="" data-img="img/caras/35.jpg">
+                            <img data-src="img/caras/35.jpg" alt="Artista 35" title="Artista 35">
+                            <h3>Artista 35</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="3" data-title="Artista 36" data-description="" data-img="img/caras/36.jpg">
+                            <img data-src="img/caras/36.jpg" alt="Artista 36" title="Artista 36">
+                            <h3>Artista 36</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="3" data-title="Artista 37" data-description="" data-img="img/caras/37.jpg">
+                            <img data-src="img/caras/37.jpg" alt="Artista 37" title="Artista 37">
+                            <h3>Artista 37</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="3" data-title="Artista 38" data-description="" data-img="img/caras/38.jpg">
+                            <img data-src="img/caras/38.jpg" alt="Artista 38" title="Artista 38">
+                            <h3>Artista 38</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="3" data-title="Artista 39" data-description="" data-img="img/caras/39.jpg">
+                            <img data-src="img/caras/39.jpg" alt="Artista 39" title="Artista 39">
+                            <h3>Artista 39</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="3" data-title="Artista 40" data-description="" data-img="img/caras/40.jpg">
+                            <img data-src="img/caras/40.jpg" alt="Artista 40" title="Artista 40">
+                            <h3>Artista 40</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="3" data-title="Artista 41" data-description="" data-img="img/caras/41.jpg">
+                            <img data-src="img/caras/41.jpg" alt="Artista 41" title="Artista 41">
+                            <h3>Artista 41</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="3" data-title="Artista 42" data-description="" data-img="img/caras/42.jpg">
+                            <img data-src="img/caras/42.jpg" alt="Artista 42" title="Artista 42">
+                            <h3>Artista 42</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="3" data-title="Artista 43" data-description="" data-img="img/caras/43.jpg">
+                            <img data-src="img/caras/43.jpg" alt="Artista 43" title="Artista 43">
+                            <h3>Artista 43</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="3" data-title="Artista 44" data-description="" data-img="img/caras/44.jpg">
+                            <img data-src="img/caras/44.jpg" alt="Artista 44" title="Artista 44">
+                            <h3>Artista 44</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="3" data-title="Artista 45" data-description="" data-img="img/caras/45.jpg">
+                            <img data-src="img/caras/45.jpg" alt="Artista 45" title="Artista 45">
+                            <h3>Artista 45</h3>
+                        </article>
+
+                        <!-- ══════════════════════════════════════════════ -->
+                        <!--  PÁGINA 4 DE ARTISTAS (46-60)                 -->
+                        <!-- ══════════════════════════════════════════════ -->
+                        
+                        <article class="artist-card" data-page="4" data-title="Artista 46" data-description="" data-img="img/caras/46.jpg">
+                            <img data-src="img/caras/46.jpg" alt="Artista 46" title="Artista 46">
+                            <h3>Artista 46</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="4" data-title="Artista 47" data-description="" data-img="img/caras/47.jpg">
+                            <img data-src="img/caras/47.jpg" alt="Artista 47" title="Artista 47">
+                            <h3>Artista 47</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="4" data-title="Artista 48" data-description="" data-img="img/caras/48.jpg">
+                            <img data-src="img/caras/48.jpg" alt="Artista 48" title="Artista 48">
+                            <h3>Artista 48</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="4" data-title="Artista 49" data-description="" data-img="img/caras/49.jpg">
+                            <img data-src="img/caras/49.jpg" alt="Artista 49" title="Artista 49">
+                            <h3>Artista 49</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="4" data-title="Artista 50" data-description="" data-img="img/caras/50.jpg">
+                            <img data-src="img/caras/50.jpg" alt="Artista 50" title="Artista 50">
+                            <h3>Artista 50</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="4" data-title="Artista 51" data-description="" data-img="img/caras/51.jpg">
+                            <img data-src="img/caras/51.jpg" alt="Artista 51" title="Artista 51">
+                            <h3>Artista 51</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="4" data-title="Artista 52" data-description="" data-img="img/caras/52.jpg">
+                            <img data-src="img/caras/52.jpg" alt="Artista 52" title="Artista 52">
+                            <h3>Artista 52</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="4" data-title="Artista 53" data-description="" data-img="img/caras/53.jpg">
+                            <img data-src="img/caras/53.jpg" alt="Artista 53" title="Artista 53">
+                            <h3>Artista 53</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="4" data-title="Artista 54" data-description="" data-img="img/caras/54.jpg">
+                            <img data-src="img/caras/54.jpg" alt="Artista 54" title="Artista 54">
+                            <h3>Artista 54</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="4" data-title="Artista 55" data-description="" data-img="img/caras/55.jpg">
+                            <img data-src="img/caras/55.jpg" alt="Artista 55" title="Artista 55">
+                            <h3>Artista 55</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="4" data-title="Artista 56" data-description="" data-img="img/caras/56.jpg">
+                            <img data-src="img/caras/56.jpg" alt="Artista 56" title="Artista 56">
+                            <h3>Artista 56</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="4" data-title="Artista 57" data-description="" data-img="img/caras/57.jpg">
+                            <img data-src="img/caras/57.jpg" alt="Artista 57" title="Artista 57">
+                            <h3>Artista 57</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="4" data-title="Artista 58" data-description="" data-img="img/caras/58.jpg">
+                            <img data-src="img/caras/58.jpg" alt="Artista 58" title="Artista 58">
+                            <h3>Artista 58</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="4" data-title="Artista 59" data-description="" data-img="img/caras/59.jpg">
+                            <img data-src="img/caras/59.jpg" alt="Artista 59" title="Artista 59">
+                            <h3>Artista 59</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="4" data-title="Artista 60" data-description="" data-img="img/caras/60.jpg">
+                            <img data-src="img/caras/60.jpg" alt="Artista 60" title="Artista 60">
+                            <h3>Artista 60</h3>
+                        </article>
+
+                        <!-- ══════════════════════════════════════════════ -->
+                        <!--  PÁGINA 5 DE ARTISTAS (61-69)                 -->
+                        <!-- ══════════════════════════════════════════════ -->
+                       
+                        <article class="artist-card" data-page="5" data-title="Artista 61" data-description="" data-img="img/caras/61.jpg">
+                            <img data-src="img/caras/61.jpg" alt="Artista 61" title="Artista 61">
+                            <h3>Artista 61</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="5" data-title="Artista 62" data-description="" data-img="img/caras/62.jpg">
+                            <img data-src="img/caras/62.jpg" alt="Artista 62" title="Artista 62">
+                            <h3>Artista 62</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="5" data-title="Artista 63" data-description="" data-img="img/caras/63.jpg">
+                            <img data-src="img/caras/63.jpg" alt="Artista 63" title="Artista 63">
+                            <h3>Artista 63</h3>
+                        </article>
+                        <article class="artist-card" data-page="5" data-title="Artista 64" data-description="" data-img="img/caras/64.jpg">
+                            <img data-src="img/caras/64.jpg" alt="Artista 64" title="Artista 64">
+                            <h3>Artista 64</h3>
+                        </article>
+                       
+                        <article class="artist-card" data-page="5" data-title="Artista 65" data-description="" data-img="img/caras/65.jpg">
+                            <img data-src="img/caras/65.jpg" alt="Artista 65" title="Artista 65">
+                            <h3>Artista 65</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="5" data-title="Artista 66" data-description="" data-img="img/caras/66.jpg">
+                            <img data-src="img/caras/66.jpg" alt="Artista 66" title="Artista 66">
+                            <h3>Artista 66</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="5" data-title="Artista 67" data-description="" data-img="img/caras/67.jpg">
+                            <img data-src="img/caras/67.jpg" alt="Artista 67" title="Artista 67">
+                            <h3>Artista 67</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="5" data-title="Artista 68" data-description="" data-img="img/caras/68.jpg">
+                            <img data-src="img/caras/68.jpg" alt="Artista 68" title="Artista 68">
+                            <h3>Artista 68</h3>
+                        </article>
+                        
+                        <article class="artist-card" data-page="5" data-title="Artista 69" data-description="" data-img="img/caras/69.jpg">
+                            <img data-src="img/caras/69.jpg" alt="Artista 69" title="Artista 69">
+                            <h3>Artista 69</h3>
+                        </article>
+
+                    </div>
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </section>
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <!--  ▶  FIN SECCIÓN ARTISTAS                                    -->
+            <!-- ─────────────────────────────────────────────────────────── -->
+
+
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <!--  ▶  SECCIÓN: GALERÍA DE FOTOS                              -->
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <section id="fotos" aria-label="Galería fotográfica">
+                <div class="section-content">
+                    <i class="fas fa-camera section-icon" style="color: var(--color-accent);" aria-hidden="true"></i>
+                    <h2>Galería de Fotos</h2>
+                    <p>Una colección visual de las intervenciones más impactantes capturadas en cinco continentes.</p>
+                    <div class="photo-grid" id="photoGrid">
+
+                        <!-- ══════════════════════════════════════════════ -->
+                        <!--  FOTOS 1-12 (con títulos y descripciones)     -->
+                        <!-- ══════════════════════════════════════════════ -->
+                        
+                        <div class="photo-item" data-title="Mural en Berlín" data-description="East Side Gallery mmmmmmmmmm." data-img="img/texturas/01.jpg">
+                            <img data-src="img/texturas/01.jpg" alt="Mural en Berlín" title="Mural en Berlín">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Graffiti en São Paulo" data-description="Vila Madalena." data-img="img/texturas/02.jpg">
+                            <img data-src="img/texturas/02.jpg" alt="Graffiti en São Paulo" title="Graffiti en São Paulo">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Street Art en Melbourne" data-description="Hosier Lane." data-img="img/texturas/03.jpg">
+                            <img data-src="img/texturas/03.jpg" alt="Street Art en Melbourne" title="Street Art en Melbourne">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Mural en Bogotá" data-description="La Candelaria." data-img="img/texturas/04.jpg">
+                            <img data-src="img/texturas/04.jpg" alt="Mural en Bogotá" title="Mural en Bogotá">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Arte Urbano en Lisboa" data-description="Barrio de Alfama." data-img="img/texturas/05.jpg">
+                            <img data-src="img/texturas/05.jpg" alt="Arte Urbano en Lisboa" title="Arte Urbano en Lisboa">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Graffiti en Nueva York" data-description="Bushwick, Brooklyn." data-img="img/texturas/06.jpg">
+                            <img data-src="img/texturas/06.jpg" alt="Graffiti en Nueva York" title="Graffiti en Nueva York">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Mural en Berlín II" data-description="East Side Gallery." data-img="img/texturas/07.jpg">
+                            <img data-src="img/texturas/07.jpg" alt="Mural en Berlín II" title="Mural en Berlín II">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Graffiti en São Paulo II" data-description="Vila Madalena." data-img="img/texturas/08.jpg">
+                            <img data-src="img/texturas/08.jpg" alt="Graffiti en São Paulo II" title="Graffiti en São Paulo II">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Street Art en Melbourne II" data-description="Hosier Lane." data-img="img/texturas/09.jpg">
+                            <img data-src="img/texturas/09.jpg" alt="Street Art en Melbourne II" title="Street Art en Melbourne II">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Mural en Bogotá II" data-description="La Candelaria." data-img="img/texturas/10.jpg">
+                            <img data-src="img/texturas/10.jpg" alt="Mural en Bogotá II" title="Mural en Bogotá II">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Arte Urbano en Lisboa II" data-description="Barrio de Alfama." data-img="img/texturas/11.jpg">
+                            <img data-src="img/texturas/11.jpg" alt="Arte Urbano en Lisboa II" title="Arte Urbano en Lisboa II">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Graffiti en Nueva York II" data-description="Bushwick, Brooklyn." data-img="img/texturas/12.jpg">
+                            <img data-src="img/texturas/12.jpg" alt="Graffiti en Nueva York II" title="Graffiti en Nueva York II">
+                        </div>
+
+                        <div class="photo-item" data-title="Foto 13" data-description="" data-img="img/texturas/13.jpg">
+                            <img data-src="img/texturas/13.jpg" alt="Foto 13" title="Foto 13">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 14" data-description="" data-img="img/texturas/14.jpg">
+                            <img data-src="img/texturas/14.jpg" alt="Foto 14" title="Foto 14">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 15" data-description="" data-img="img/texturas/15.jpg">
+                            <img data-src="img/texturas/15.jpg" alt="Foto 15" title="Foto 15">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 16" data-description="" data-img="img/texturas/16.jpg">
+                            <img data-src="img/texturas/16.jpg" alt="Foto 16" title="Foto 16">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 17" data-description="" data-img="img/texturas/17.jpg">
+                            <img data-src="img/texturas/17.jpg" alt="Foto 17" title="Foto 17">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 18" data-description="" data-img="img/texturas/18.jpg">
+                            <img data-src="img/texturas/18.jpg" alt="Foto 18" title="Foto 18">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 19" data-description="" data-img="img/texturas/19.jpg">
+                            <img data-src="img/texturas/19.jpg" alt="Foto 19" title="Foto 19">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 20" data-description="" data-img="img/texturas/20.jpg">
+                            <img data-src="img/texturas/20.jpg" alt="Foto 20" title="Foto 20">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 21" data-description="" data-img="img/texturas/21.jpg">
+                            <img data-src="img/texturas/21.jpg" alt="Foto 21" title="Foto 21">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 22" data-description="" data-img="img/texturas/22.jpg">
+                            <img data-src="img/texturas/22.jpg" alt="Foto 22" title="Foto 22">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 23" data-description="" data-img="img/texturas/23.jpg">
+                            <img data-src="img/texturas/23.jpg" alt="Foto 23" title="Foto 23">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 24" data-description="" data-img="img/texturas/24.jpg">
+                            <img data-src="img/texturas/24.jpg" alt="Foto 24" title="Foto 24">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 25" data-description="" data-img="img/texturas/25.jpg">
+                            <img data-src="img/texturas/25.jpg" alt="Foto 25" title="Foto 25">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 26" data-description="" data-img="img/texturas/26.jpg">
+                            <img data-src="img/texturas/26.jpg" alt="Foto 26" title="Foto 26">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 27" data-description="" data-img="img/texturas/27.jpg">
+                            <img data-src="img/texturas/27.jpg" alt="Foto 27" title="Foto 27">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 28" data-description="" data-img="img/texturas/28.jpg">
+                            <img data-src="img/texturas/28.jpg" alt="Foto 28" title="Foto 28">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 29" data-description="" data-img="img/texturas/29.jpg">
+                            <img data-src="img/texturas/29.jpg" alt="Foto 29" title="Foto 29">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 30" data-description="" data-img="img/texturas/30.jpg">
+                            <img data-src="img/texturas/30.jpg" alt="Foto 30" title="Foto 30">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 31" data-description="" data-img="img/texturas/31.jpg">
+                            <img data-src="img/texturas/31.jpg" alt="Foto 31" title="Foto 31">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 32" data-description="" data-img="img/texturas/32.jpg">
+                            <img data-src="img/texturas/32.jpg" alt="Foto 32" title="Foto 32">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 33" data-description="" data-img="img/texturas/33.jpg">
+                            <img data-src="img/texturas/33.jpg" alt="Foto 33" title="Foto 33">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 34" data-description="" data-img="img/texturas/34.jpg">
+                            <img data-src="img/texturas/34.jpg" alt="Foto 34" title="Foto 34">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 35" data-description="" data-img="img/texturas/35.jpg">
+                            <img data-src="img/texturas/35.jpg" alt="Foto 35" title="Foto 35">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 36" data-description="" data-img="img/texturas/36.jpg">
+                            <img data-src="img/texturas/36.jpg" alt="Foto 36" title="Foto 36">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 37" data-description="" data-img="img/texturas/37.jpg">
+                            <img data-src="img/texturas/37.jpg" alt="Foto 37" title="Foto 37">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 38" data-description="" data-img="img/texturas/38.jpg">
+                            <img data-src="img/texturas/38.jpg" alt="Foto 38" title="Foto 38">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 39" data-description="" data-img="img/texturas/39.jpg">
+                            <img data-src="img/texturas/39.jpg" alt="Foto 39" title="Foto 39">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 40" data-description="" data-img="img/texturas/40.jpg">
+                            <img data-src="img/texturas/40.jpg" alt="Foto 40" title="Foto 40">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 41" data-description="" data-img="img/texturas/41.jpg">
+                            <img data-src="img/texturas/41.jpg" alt="Foto 41" title="Foto 41">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 42" data-description="" data-img="img/texturas/42.jpg">
+                            <img data-src="img/texturas/42.jpg" alt="Foto 42" title="Foto 42">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 43" data-description="" data-img="img/texturas/43.jpg">
+                            <img data-src="img/texturas/43.jpg" alt="Foto 43" title="Foto 43">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 44" data-description="" data-img="img/texturas/44.jpg">
+                            <img data-src="img/texturas/44.jpg" alt="Foto 44" title="Foto 44">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 45" data-description="" data-img="img/texturas/45.jpg">
+                            <img data-src="img/texturas/45.jpg" alt="Foto 45" title="Foto 45">
+                        </div>
+                        
+                        <div class="photo-item" data-title="Foto 46" data-description="" data-img="img/texturas/46.jpg">
+                            <img data-src="img/texturas/46.jpg" alt="Foto 46" title="Foto 46">
+                        </div>
+                       
+                        <div class="photo-item" data-title="Foto 47" data-description="" data-img="img/texturas/47.jpg">
+                            <img data-src="img/texturas/47.jpg" alt="Foto 47" title="Foto 47">
+                        </div>
+                       
+                        <div class="photo-item" data-title="Foto 48" data-description="" data-img="img/texturas/48.jpg">
+                            <img data-src="img/texturas/48.jpg" alt="Foto 48" title="Foto 48">
+                        </div>
+                       
+                        <div class="photo-item" data-title="Foto 49" data-description="" data-img="img/texturas/49.jpg">
+                            <img data-src="img/texturas/49.jpg" alt="Foto 49" title="Foto 49">
+                        </div>
+                       
+                        <div class="photo-item" data-title="Foto 50" data-description="" data-img="img/texturas/50.jpg">
+                            <img data-src="img/texturas/50.jpg" alt="Foto 50" title="Foto 50">
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <!--  ▶  FIN SECCIÓN FOTOS                                      -->
+            <!-- ─────────────────────────────────────────────────────────── -->
+
+
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <!--  ▶  SECCIÓN: VIDEOS                                        -->
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <section id="videos" aria-label="Videos del movimiento">
+                <div class="section-content">
+                    <i class="fas fa-video section-icon" style="color: var(--color-accent-3);" aria-hidden="true"></i>
+                    <h2>Más Videos</h2>
+                    <p>Documentales cortos, time-lapses y entrevistas exclusivas con los artistas.</p>
+                    <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 1.5rem;">
+                        <div class="video-container"><div class="video-placeholder"><i class="fas fa-play-circle play-button"></i></div></div>
+                        <div class="video-container"><div class="video-placeholder"><i class="fas fa-play-circle play-button"></i></div></div>
+                    </div>
+                </div>
+            </section>
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <!--  ▶  FIN SECCIÓN VIDEOS                                     -->
+            <!-- ─────────────────────────────────────────────────────────── -->
+
+
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <!--  ▶  SECCIÓN: QUIÉNES SOMOS (Equipo)                        -->
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <section id="quienes-somos" aria-label="Quiénes somos">
+                <div class="section-content">
+                    <i class="fas fa-users section-icon" style="color: var(--color-accent);" aria-hidden="true"></i>
+                    <h2>Quiénes Somos</h2>
+                    <p>Somos un colectivo de documentalistas, fotógrafos y amantes del arte urbano.</p>
+                    <div class="team-grid">
+                        <article class="team-member" data-title="Carlos Mendoza" data-description="Documentalista con 15 años de experiencia." data-img="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1200"><img data-src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400" loading="lazy" alt="Carlos"><h3>Carlos Mendoza</h3><div class="role">Director</div><p>Documentalista con 15 años de experiencia en cine urbano.</p></article>
+                        <article class="team-member" data-title="Ana Rodríguez" data-description="Especialista en producción." data-img="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200"><img data-src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400" loading="lazy" alt="Ana"><h3>Ana Rodríguez</h3><div class="role">Productora</div><p>Especialista en producción de documentales culturales.</p></article>
+                        <article class="team-member" data-title="Miguel Santos" data-description="Fotógrafo documental premiado." data-img="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=1200"><img data-src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400" loading="lazy" alt="Miguel"><h3>Miguel Santos</h3><div class="role">Fotógrafo Principal</div><p>Fotógrafo documental premiado.</p></article>
+                        <article class="team-member" data-title="Laura Chen" data-description="Editora de video y colorista." data-img="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=1200"><img data-src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400" loading="lazy" alt="Laura"><h3>Laura Chen</h3><div class="role">Editora</div><p>Editora de video y colorista.</p></article>
+                        <article class="team-member" data-title="Roberto Díaz" data-description="Ingeniero de sonido." data-img="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=1200"><img data-src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=400" loading="lazy" alt="Roberto"><h3>Roberto Díaz</h3><div class="role">Diseño Sonoro</div><p>Ingeniero de sonido especializado.</p></article>
+                        <article class="team-member" data-title="Sofia Martínez" data-description="Historiadora del arte urbana." data-img="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=1200"><img data-src="https://images.unsplash.com/photo-1594744803329-e58b31de8bf5?w=400" loading="lazy" alt="Sofia"><h3>Sofia Martínez</h3><div class="role">Investigadora</div><p>Historiadora del arte urbana.</p></article>
+                    </div>
+                </div>
+            </section>
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <!--  ▶  FIN SECCIÓN QUIÉNES SOMOS                               -->
+            <!-- ─────────────────────────────────────────────────────────── -->
+
+
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <!--  ▶  SECCIÓN: CONTACTO                                      -->
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <section id="contacto" aria-label="Contacto">
+                <div class="section-content">
+                    <i class="fas fa-envelope section-icon" style="color: var(--color-accent-3);" aria-hidden="true"></i>
+                    <h2>Contacto</h2>
+                    <p>¿Quieres colaborar, proponer un artista o simplemente saludar? Escríbenos.</p>
+                    <form class="contact-form" aria-label="Formulario de contacto">
+                        <div class="form-group"><input type="text" placeholder="Tu nombre" required aria-label="Nombre"></div>
+                        <div class="form-group"><input type="email" placeholder="Tu email" required aria-label="Email"></div>
+                        <div class="form-group"><textarea placeholder="Tu mensaje..." required aria-label="Mensaje"></textarea></div>
+                        <button type="submit" class="submit-btn" title="Enviar mensaje">Enviar Mensaje</button>
+                    </form>
+                    <div style="margin-top: 1.5rem;">
+                        <a href="#" style="color: var(--color-accent-2); font-size: 1.5rem; margin: 0 1rem;" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" style="color: var(--color-accent-2); font-size: 1.5rem; margin: 0 1rem;" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" style="color: var(--color-accent-2); font-size: 1.5rem; margin: 0 1rem;" title="Twitter"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </section>
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <!--  ▶  FIN SECCIÓN CONTACTO                                    -->
+            <!-- ─────────────────────────────────────────────────────────── -->
+
+
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <!--  ▶  FOOTER (Pie de página)                                  -->
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <footer class="site-footer" aria-label="Pie de página">
+                <div class="footer-content">
+                    <a href="#home" class="footer-logo">Alta Gracia<span style="color: var(--color-accent);"> Se Pinta</span></a>
+                    <div class="footer-social">
+                        <a href="#" title="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" title="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" title="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" title="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" title="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                    <div class="footer-divider"></div>
+                    <p class="footer-copy">&copy; 2026 <strong>Alta Gracia Se Pinta</strong>. Todos los derechos reservados.<br>Documental independiente sobre muralismo urbano y street art.</p>
+                </div>
+            </footer>
+            <!-- ─────────────────────────────────────────────────────────── -->
+            <!--  ▶  FIN FOOTER                                              -->
+            <!-- ─────────────────────────────────────────────────────────── -->
+
+
+        </div>
+    </main>
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!--  ★  FIN CONTENEDOR PRINCIPAL DE SECCIONES                          -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!--  ★  MODAL (Visor de imágenes con navegación)                       -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <span class="modal-close" aria-label="Cerrar modal">&times;</span>
+            <div class="modal-counter"><span id="modalCounterCurrent">1</span> / <span id="modalCounterTotal">1</span></div>
+            <div class="modal-image-wrapper">
+                <button class="modal-nav-btn prev" id="modalPrevBtn" aria-label="Anterior"><i class="fas fa-chevron-left"></i></button>
+                <img class="modal-image" id="modalImage" src="" alt="">
+                <button class="modal-nav-btn next" id="modalNextBtn" aria-label="Siguiente"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <h3 class="modal-title" id="modalTitle"></h3>
+            <p class="modal-description" id="modalDescription"></p>
+        </div>
+    </div>
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!--  ★  FIN MODAL                                                      -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!--  ★  PRELOADER (Pantalla de carga inicial)                          -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <div class="preloader" id="preloader" role="status" aria-live="polite">
+        <div class="preloader-logo">Alta Gracia<span> Se Pinta</span></div>
+        <div class="preloader-text">Cargando contenido</div>
+        <div class="preloader-bar-container">
+            <div class="preloader-bar"><div class="preloader-bar-fill" id="preloaderBarFill"></div></div>
+        </div>
+        <div class="preloader-percent"><span id="preloaderPercent">0</span><span>%</span></div>
+    </div>
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+    <!--  ★  FIN PRELOADER                                                  -->
+    <!-- ═══════════════════════════════════════════════════════════════════ -->
+
+
+    <script>
+        // === UTILIDADES ===
+        const isMobile = () => window.innerWidth <= 600;
+        const mainContainer = document.getElementById('mainContainer');
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-links a');
+
+        // === PRELOADER ===
+        const preloader = document.getElementById('preloader');
+        const preloaderBarFill = document.getElementById('preloaderBarFill');
+        const preloaderPercent = document.getElementById('preloaderPercent');
+
+        function updatePreloaderProgress(percent) {
+            const clamped = Math.max(0, Math.min(100, Math.round(percent)));
+            preloaderBarFill.style.width = clamped + '%';
+            preloaderPercent.textContent = clamped;
+        }
+
+        function hidePreloader() { preloader.classList.add('hidden'); }
+
+        // === LAZY LOADING ===
+        const loadedSections = new Set();
+        function loadSectionImages(section) {
+            if (!section) return 0;
+            const sectionId = section.id;
+            if (loadedSections.has(sectionId)) return 0;
+            const images = section.querySelectorAll('img[data-src]');
+            images.forEach(img => {
+                const src = img.getAttribute('data-src');
+                if (src) { img.src = src; img.removeAttribute('data-src'); }
+            });
+            loadedSections.add(sectionId);
+            return images.length;
+        }
+
+        function waitForSectionImages(section, onProgress, timeoutMs) {
+            return new Promise(resolve => {
+                if (!section) { resolve(); return; }
+                const images = section.querySelectorAll('img[src]');
+                if (images.length === 0) { resolve(); return; }
+                let loaded = 0; let resolved = false; const total = images.length;
+                const tryResolve = () => {
+                    if (resolved) return;
+                    loaded++;
+                    const percent = (loaded / total) * 100;
+                    if (onProgress) onProgress(percent);
+                    if (loaded >= total) { resolved = true; resolve(); }
+                };
+                images.forEach(img => {
+                    if (img.complete && img.naturalHeight !== 0) { tryResolve(); }
+                    else { img.addEventListener('load', tryResolve, { once: true }); img.addEventListener('error', tryResolve, { once: true }); }
+                });
+                setTimeout(() => { if (!resolved) { resolved = true; if (onProgress) onProgress(100); resolve(); } }, timeoutMs);
+            });
+        }
+
+        function preloadNextSection(currentIndex) {
+            const nextIndex = currentIndex + 1;
+            if (nextIndex < sections.length) { setTimeout(() => { loadSectionImages(sections[nextIndex]); }, 500); }
+        }
+
+        function updateActiveLink(index) { navLinks.forEach((link, i) => { link.classList.toggle('active', i === index); }); }
+
+        async function loadAllImages() {
+            const totalSections = sections.length;
+            let sectionsLoaded = 0;
+            for (let i = 0; i < totalSections; i++) {
+                const section = sections[i];
+                const images = section.querySelectorAll('img[data-src]');
+                if (images.length > 0) {
+                    loadSectionImages(section);
+                    await waitForSectionImages(section, (sectionPercent) => {
+                        const globalPercent = ((sectionsLoaded + (sectionPercent / 100)) / totalSections) * 100;
+                        updatePreloaderProgress(globalPercent);
+                    }, 3000);
+                } else { sectionsLoaded++; updatePreloaderProgress((sectionsLoaded / totalSections) * 100); }
+                sectionsLoaded++;
+                updatePreloaderProgress((sectionsLoaded / totalSections) * 100);
+            }
+            updatePreloaderProgress(100);
+            await new Promise(resolve => setTimeout(resolve, 500));
+            hidePreloader();
+        }
+
+        // === SCROLL ===
+        let scrollStopTimer;
+        function onScrollStopDesktop() {
+            const scrollPosition = mainContainer.scrollLeft;
+            const sectionWidth = window.innerWidth;
+            const sectionIndex = Math.round(scrollPosition / sectionWidth);
+            if (sections[sectionIndex]) { loadSectionImages(sections[sectionIndex]); preloadNextSection(sectionIndex); updateActiveLink(sectionIndex); }
+        }
+
+        let mobileObserver;
+        function setupMobileObserver() {
+            if (mobileObserver) mobileObserver.disconnect();
+            mobileObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting && entry.intersectionRatio >= 0.3) {
+                        const section = entry.target;
+                        const sectionIndex = Array.from(sections).indexOf(section);
+                        loadSectionImages(section);
+                        preloadNextSection(sectionIndex);
+                        updateActiveLink(sectionIndex);
+                    }
+                });
+            }, { root: null, threshold: [0.3], rootMargin: '-30% 0px -30% 0px' });
+            sections.forEach(section => mobileObserver.observe(section));
+        }
+        function teardownMobileObserver() { if (mobileObserver) { mobileObserver.disconnect(); mobileObserver = null; } }
+        function initMode() { if (isMobile()) { teardownMobileObserver(); setupMobileObserver(); } else { teardownMobileObserver(); } }
+
+        mainContainer.addEventListener('scroll', () => { if (isMobile()) return; clearTimeout(scrollStopTimer); scrollStopTimer = setTimeout(onScrollStopDesktop, 300); }, { passive: true });
+
+        let mobileScrollTimer;
+        window.addEventListener('scroll', () => {
+            if (!isMobile()) return;
+            clearTimeout(mobileScrollTimer);
+            mobileScrollTimer = setTimeout(() => {
+                const viewportCenter = window.innerHeight / 2;
+                let closestSection = sections[0]; let closestDistance = Infinity;
+                sections.forEach(section => {
+                    const rect = section.getBoundingClientRect();
+                    const sectionCenter = rect.top + rect.height / 2;
+                    const distance = Math.abs(sectionCenter - viewportCenter);
+                    if (distance < closestDistance) { closestDistance = distance; closestSection = section; }
+                });
+                const sectionIndex = Array.from(sections).indexOf(closestSection);
+                loadSectionImages(closestSection);
+                preloadNextSection(sectionIndex);
+                updateActiveLink(sectionIndex);
+            }, 200);
+        }, { passive: true });
+
+        // === MENÚ HAMBURGUESA ===
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        hamburger.addEventListener('click', () => { hamburger.classList.toggle('active'); mobileMenu.classList.toggle('active'); });
+        mobileLinks.forEach(link => { link.addEventListener('click', () => { hamburger.classList.remove('active'); mobileMenu.classList.remove('active'); }); });
+
+        // === NAVEGACIÓN ===
+        function scrollToSectionDesktop(index) {
+            const scrollPosition = index * window.innerWidth;
+            mainContainer.scrollTo({ left: scrollPosition, behavior: 'smooth' });
+            setTimeout(() => { loadSectionImages(sections[index]); preloadNextSection(index); }, 800);
+        }
+
+        function scrollToSectionMobile(targetSection, sectionIndex) {
+            hamburger.classList.remove('active');
+            mobileMenu.classList.remove('active');
+            const targetTop = targetSection.getBoundingClientRect().top + window.pageYOffset - 75;
+            window.scrollTo({ top: targetTop, behavior: 'smooth' });
+            setTimeout(() => {
+                const correctedTop = targetSection.getBoundingClientRect().top + window.pageYOffset - 75;
+                window.scrollTo({ top: correctedTop, behavior: 'smooth' });
+            }, 1200);
+            preloadNextSection(sectionIndex);
+        }
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const sectionIndex = parseInt(link.getAttribute('data-section'));
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                if (isMobile()) { if (targetSection) scrollToSectionMobile(targetSection, sectionIndex); }
+                else { scrollToSectionDesktop(sectionIndex); }
+                updateActiveLink(sectionIndex);
+            });
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const targetId = link.getAttribute('href');
+                const targetSection = document.querySelector(targetId);
+                const sectionIndex = Array.from(sections).indexOf(targetSection);
+                if (targetSection && isMobile()) scrollToSectionMobile(targetSection, sectionIndex);
+                updateActiveLink(sectionIndex);
+            });
+        });
+
+        // === MODAL CON NAVEGACIÓN ===
+        const modal = document.getElementById('modal');
+        const modalImage = document.getElementById('modalImage');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const modalClose = document.querySelector('.modal-close');
+        const modalPrevBtn = document.getElementById('modalPrevBtn');
+        const modalNextBtn = document.getElementById('modalNextBtn');
+        const modalCounterCurrent = document.getElementById('modalCounterCurrent');
+        const modalCounterTotal = document.getElementById('modalCounterTotal');
+
+        let currentModalItems = [];
+        let currentModalIndex = 0;
+
+        function openModal(index, allItems) {
+            currentModalItems = allItems;
+            currentModalIndex = index;
+            updateModalContent();
+            modal.classList.add('active');
+            if (isMobile()) document.body.style.overflow = 'hidden';
+        }
+
+        function updateModalContent() {
+            const item = currentModalItems[currentModalIndex];
+            if (!item) return;
+            modalImage.src = item.img;
+            modalImage.alt = item.title;
+            modalTitle.textContent = item.title;
+            modalDescription.textContent = item.description || '';
+            modalCounterCurrent.textContent = currentModalIndex + 1;
+            modalCounterTotal.textContent = currentModalItems.length;
+            modalPrevBtn.disabled = currentModalIndex === 0;
+            modalNextBtn.disabled = currentModalIndex === currentModalItems.length - 1;
+        }
+
+        function closeModal() {
+            modal.classList.remove('active');
+            if (isMobile()) document.body.style.overflow = '';
+        }
+
+        function nextModalItem() {
+            if (currentModalIndex < currentModalItems.length - 1) { currentModalIndex++; updateModalContent(); }
+        }
+
+        function prevModalItem() {
+            if (currentModalIndex > 0) { currentModalIndex--; updateModalContent(); }
+        }
+
+        modalPrevBtn.addEventListener('click', (e) => { e.stopPropagation(); prevModalItem(); });
+        modalNextBtn.addEventListener('click', (e) => { e.stopPropagation(); nextModalItem(); });
+        modalClose.addEventListener('click', closeModal);
+        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+
+        document.addEventListener('keydown', (e) => {
+            if (!modal.classList.contains('active')) return;
+            if (e.key === 'Escape') closeModal();
+            else if (e.key === 'ArrowLeft') prevModalItem();
+            else if (e.key === 'ArrowRight') nextModalItem();
+        });
+
+        // Delegación de clics para abrir modal
+        document.addEventListener('click', (e) => {
+            const item = e.target.closest('.photo-item, .artist-card, .history-item, .team-member');
+            if (!item) return;
+
+            const parentSection = item.closest('section');
+            if (!parentSection) return;
+
+            const allCards = Array.from(parentSection.querySelectorAll('.photo-item, .artist-card, .history-item, .team-member'));
+            
+            // Si es la sección de artistas, incluir TODOS (incluso los ocultos por paginación)
+            let validCards;
+            if (parentSection.id === 'artistas') {
+                validCards = allCards.filter(card => card.getAttribute('data-img'));
+            } else {
+                validCards = allCards.filter(card => {
+                    const style = window.getComputedStyle(card);
+                    return style.display !== 'none' && card.getAttribute('data-img');
+                });
+            }
+
+            const clickedIndex = validCards.indexOf(item);
+            if (clickedIndex === -1) return;
+
+            const allItems = validCards.map(card => ({
+                title: card.getAttribute('data-title'),
+                description: card.getAttribute('data-description'),
+                img: card.getAttribute('data-img')
+            }));
+
+            openModal(clickedIndex, allItems);
+        });
+
+        // === PAGINACIÓN ===
+        const pagination = document.getElementById('pagination');
+        const artistCards = document.querySelectorAll('.artist-card');
+        const itemsPerPage = 15;
+        let currentPage = 1;
+        const totalPages = Math.ceil(artistCards.length / itemsPerPage);
+
+        function showPage(page, shouldScroll = false) {
+            currentPage = page;
+            artistCards.forEach(card => {
+                const cardPage = parseInt(card.getAttribute('data-page'));
+                card.style.display = cardPage === page ? 'block' : 'none';
+            });
+            renderPagination();
+            
+            if (shouldScroll) {
+                const artistasSection = document.getElementById('artistas');
+                if (artistasSection) {
+                    if (isMobile()) {
+                        const sectionTop = artistasSection.getBoundingClientRect().top + window.pageYOffset;
+                        window.scrollTo({ top: sectionTop, behavior: 'smooth' });
+                    } else {
+                        artistasSection.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                }
+            }
+        }
+
+        function renderPagination() {
+            pagination.innerHTML = '';
+            const prevBtn = document.createElement('button');
+            prevBtn.className = 'pagination-btn';
+            prevBtn.textContent = '← Anterior';
+            prevBtn.disabled = currentPage === 1;
+            prevBtn.addEventListener('click', () => { if (currentPage > 1) showPage(currentPage - 1, true); });
+            pagination.appendChild(prevBtn);
+            
+            for (let i = 1; i <= totalPages; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = 'pagination-btn';
+                if (i === currentPage) pageBtn.classList.add('active');
+                pageBtn.textContent = i;
+                pageBtn.addEventListener('click', () => showPage(i, true));
+                pagination.appendChild(pageBtn);
+            }
+            
+            const nextBtn = document.createElement('button');
+            nextBtn.className = 'pagination-btn';
+            nextBtn.textContent = 'Siguiente →';
+            nextBtn.disabled = currentPage === totalPages;
+            nextBtn.addEventListener('click', () => { if (currentPage < totalPages) showPage(currentPage + 1, true); });
+            pagination.appendChild(nextBtn);
+        }
+
+        showPage(1, false);
+
+        // === REDIMENSIONAR ===
+        let resizeTimeout;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                if (!isMobile()) {
+                    const currentScroll = mainContainer.scrollLeft;
+                    const sectionWidth = window.innerWidth;
+                    const currentIndex = Math.round(currentScroll / sectionWidth);
+                    mainContainer.scrollTo({ left: currentIndex * sectionWidth, behavior: 'auto' });
+                }
+                initMode();
+            }, 200);
+        });
+
+        // === SCROLL HORIZONTAL CON RUEDA ===
+        mainContainer.addEventListener('wheel', (e) => {
+            if (isMobile()) return;
+            const currentSection = sections[Math.round(mainContainer.scrollLeft / window.innerWidth)];
+            const hasVerticalScroll = currentSection && currentSection.scrollHeight > currentSection.clientHeight;
+            if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && !hasVerticalScroll) {
+                e.preventDefault();
+                const direction = e.deltaY > 0 ? 1 : -1;
+                const currentIndex = Math.round(mainContainer.scrollLeft / window.innerWidth);
+                const nextIndex = Math.max(0, Math.min(sections.length - 1, currentIndex + direction));
+                scrollToSectionDesktop(nextIndex);
+            }
+        }, { passive: false });
+
+        // === INICIALIZACIÓN ===
+        loadAllImages().then(() => { initMode(); });
+    </script>
+</body>
+</html>
